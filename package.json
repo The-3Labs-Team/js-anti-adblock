@@ -4,8 +4,8 @@
     "obfuscate": "javascript-obfuscator dist/script.min.js --output dist/script.min.ob.js",
     "build": "npm run minify && npm run obfuscate",
     "start": "http-server -p 8080",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint resources/**",
+    "lint:fix": "eslint resources/** --fix"
   },
   "dependencies": {
 
