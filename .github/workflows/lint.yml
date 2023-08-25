@@ -23,4 +23,4 @@ jobs:
         run: npm install
 
       - name: Run ESLint
-        run: npx eslint . --fix
+        run: npm run lint:fix
