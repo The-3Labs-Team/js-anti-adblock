@@ -1,49 +1,60 @@
 const config = {
-    color: '#db2027',
-    logo: {
-        url: 'https://www.tomshw.it/wp-content/uploads/2021/09/toms_logo_nero.svg',
-        width: '300px',
-        height: '50px',
-    },
-    hiddenBody: true
-};
+  color: '#db2027',
+  logo: {
+    url: 'https://www.tomshw.it/wp-content/uploads/2021/09/toms_logo_nero.svg',
+    width: '300px',
+    height: '50px'
+  },
+  hiddenBody: true
+}
 
 const body = document.querySelector('body')
 window.onload = detectAdBlock()
 
-async function detectAdBlock() {
-    let adBlockEnabled = false
-    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-    try {
-        await fetch(new Request(googleAdUrl))
-            .then(response => response.text())
-            .then(response => {
-                if (response.includes('uBlock')) {
-                    adBlockEnabled = true
-                }
-            })
-            .catch(_ => adBlockEnabled = true)
-    } catch (e) {
-        adBlockEnabled = true
-    } finally {
-        console.log(`AdBlock Enabled: ${adBlockEnabled}`)
-    }
+async function detectAdBlock () {
+  let adBlockEnabled = false
+  const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+  try {
+    const keywordsToCheck = ['uBlock', 'height:1px!important']
 
-    if (adBlockEnabled) {
-        if(config.hiddenBody) {
-            body.innerHTML = ''
-            body.setAttribute('aria-hidden', 'true')
+    await fetch(new Request(googleAdUrl))
+      .then(response => {
+        if (!response.headers.get('content-length')) {
+          adBlockEnabled = true
         }
-        showBannerAdBlock()
+        return response
+      })
+      .then(response => response.text())
+      .then(responseText => {
+        const adBlockDetected = keywordsToCheck.some(keyword => responseText.includes(keyword))
+
+        if (adBlockDetected) {
+          adBlockEnabled = true
+        }
+      })
+      .catch(_ => adBlockEnabled = true)
+  } catch (e) {
+    adBlockEnabled = true
+  } finally {
+    console.log(`AdBlock Enabled: ${adBlockEnabled}`)
+  }
+
+  if (adBlockEnabled) {
+    body.setAttribute('aria-hidden', 'true')
+    if (config.hiddenBody) {
+      body.innerHTML = ''
     }
+    showBannerAdBlock()
+  }
 }
 
-function showBannerAdBlock() {
-    body.style.overflow = 'hidden'
-    body.innerHTML +=
+function showBannerAdBlock () {
+  body.style.overflow = 'hidden'
+
+  body.innerHTML +=
         `
-        <div style="width: 100%; height: 100vh; padding: 10px; background-color: rgba(0,0,0,0.68); position: fixed; top: 0; left: 0; display: flex; font-family: 'Arial Nova';">
-            <div style="width: 900px; margin: auto; background-color: white; border-radius: 1rem; padding-top: 50px; overflow: hidden">
+        <div style="${getRandomStyle()}">
+            <div style="width: 100%; max-width: 900px; margin: auto; background-color: white; border-radius: 1rem; padding-top: 50px; overflow: hidden">
                 <!--Header-->
                 <div style="text-align: center">
                     <img src="${config.logo.url}" alt="Logo" 
@@ -81,4 +92,58 @@ function showBannerAdBlock() {
             </div>  
         </div>
 `
+}
+
+function getRandomStyle () {
+  const styles = [
+    {
+      name: 'width',
+      value: '100%'
+    },
+    {
+      name: 'height',
+      value: '100vh'
+    },
+    {
+      name: 'padding',
+      value: '10px'
+    },
+    {
+      name: 'background-color',
+      value: 'rgba(0,0,0,0.68)'
+    },
+    {
+      name: 'position',
+      value: 'fixed'
+    },
+    {
+      name: 'top',
+      value: '0'
+    },
+    {
+      name: 'left',
+      value: '0'
+    },
+    {
+      name: 'z-index',
+      value: '999999'
+    },
+    {
+      name: 'display',
+      value: 'flex'
+    },
+    {
+      name: 'font-family',
+      value: 'Arial Nova'
+    },
+    {
+      name: 'backdrop-filter',
+      value: 'blur(5px)'
+    }
+  ]
+
+  const randomStyle = Array.from({ length: styles.length }, (_, index) => index)
+    .sort(() => Math.random() - 0.5)
+
+  return randomStyle.map(index => `${styles[index].name}: ${styles[index].value};`).join(' ')
 }
