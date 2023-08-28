@@ -1,8 +1,8 @@
 {
   "name": "js-anti-adblock",
   "description": "A simple and lightweight script for detect Adblock",
-  "version": "1.0.1",
-  "main": "demo/demo.html",
+  "version": "1.0.2",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/The-3Labs-Team/js-anti-adblock.git"
