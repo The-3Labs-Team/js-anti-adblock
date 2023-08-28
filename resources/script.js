@@ -4,7 +4,7 @@ export default class AntiAdBlocker {
     const config = {
       color: color,
       logo: {
-        url: url ?? 'https://www.tomshw.it/wp-content/uploads/2021/09/toms_logo_nero.svg',
+        url: url ?? './assets/logo.svg',
         width: width ?? '300px',
         height: heigth ?? '50px'
       },
