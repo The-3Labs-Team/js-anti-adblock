@@ -1,12 +1,12 @@
 export default class AntiAdBlocker {
-  constructor(color, logoUrl, logoW, logoH, hiddenBody) {
+  constructor({color: color, logo:{url: url, width: width, heigth: heigth}, hiddenBody: hiddenBody}) {
 
     const config = {
       color: color,
       logo: {
-        url: logoUrl ?? 'https://www.tomshw.it/wp-content/uploads/2021/09/toms_logo_nero.svg',
-        width: logoW ?? '300px',
-        height: logoH ?? '50px'
+        url: url ?? 'https://www.tomshw.it/wp-content/uploads/2021/09/toms_logo_nero.svg',
+        width: width ?? '300px',
+        height: heigth ?? '50px'
       },
       hiddenBody: hiddenBody ?? true
     }
