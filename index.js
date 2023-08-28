@@ -1,1 +1,3 @@
-module.exports = require('./dist/script.min.ob.js');
+import AntiAdBlocker from './dist/script.min.ob.js';
+
+export default AntiAdBlocker;
