@@ -21,22 +21,16 @@ export default class AntiAdBlocker {
       try {
         const keywordsToCheck = ['uBlock', 'height:1px!important']
 
-        await fetch(new Request(googleAdUrl))
-          .then(response => {
-            if (!response.headers.get('content-length')) {
-              adBlockEnabled = true
-            }
-            return response
-          })
-          .then(response => response.text())
-          .then(responseText => {
-            const adBlockDetected = keywordsToCheck.some(keyword => responseText.includes(keyword))
+        const response = await fetch(new Request(googleAdUrl))
+        if (!response.headers.get('content-length')) {
+          adBlockEnabled = true
+        }
 
-            if (adBlockDetected) {
-              adBlockEnabled = true
-            }
-          })
-          .catch(_ => adBlockEnabled = true)
+        const responseText = await response.text()
+        const adBlockDetected = keywordsToCheck.some(keyword => responseText.includes(keyword))
+        if (adBlockDetected) {
+          adBlockEnabled = true
+        }
       } catch (e) {
         adBlockEnabled = true
       } finally {
@@ -151,6 +145,5 @@ export default class AntiAdBlocker {
 
       return randomStyle.map(index => `${styles[index].name}: ${styles[index].value};`).join(' ')
     }
-
   }
 }
