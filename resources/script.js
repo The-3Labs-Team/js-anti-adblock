@@ -11,8 +11,9 @@ export default class AntiAdBlocker {
       hiddenBody: hiddenBody ?? true
     }
 
-    window.onload = detectAdBlock();
+    const body = document.querySelector('body')
 
+    window.onload = detectAdBlock();
 
     async function detectAdBlock () {
       let adBlockEnabled = false
@@ -43,18 +44,18 @@ export default class AntiAdBlocker {
       }
 
       if (adBlockEnabled) {
-        document.querySelector('body').setAttribute('aria-hidden', 'true')
+        body.setAttribute('aria-hidden', 'true')
         if (config.hiddenBody) {
-          document.querySelector('body').innerHTML = ''
+          body.innerHTML = ''
         }
         showBannerAdBlock()
       }
     }
 
     function showBannerAdBlock () {
-      document.querySelector('body').style.overflow = 'hidden'
+      body.style.overflow = 'hidden'
 
-      document.querySelector('body').innerHTML +=
+      body.innerHTML +=
             `
             <div style="${getRandomStyle()}">
                 <div style="width: 100%; max-width: 900px; margin: auto; background-color: white; border-radius: 1rem; padding-top: 50px; overflow: hidden">
