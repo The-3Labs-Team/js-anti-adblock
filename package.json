@@ -1,4 +1,22 @@
 {
+  "name": "js-anti-adblock",
+  "description": "A simple and lightweight script for detect Adblock",
+  "version": "1.0.1",
+  "main": "demo/demo.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-3Labs-Team/js-anti-adblock.git"
+  },
+  "keywords": [
+    "antiadblock",
+    "adblock"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/The-3Labs-Team/js-anti-adblock/issues"
+  },
+  "homepage": "https://github.com/The-3Labs-Team/js-anti-adblock#readme",
   "scripts": {
     "minify": "uglifyjs resources/script.js -o dist/script.min.js -c -m",
     "obfuscate": "javascript-obfuscator dist/script.min.js --output dist/script.min.ob.js",
@@ -6,9 +24,6 @@
     "start": "http-server -p 8080",
     "lint": "eslint resources/**",
     "lint:fix": "eslint resources/** --fix"
-  },
-  "dependencies": {
-
   },
   "devDependencies": {
     "http-server": "^14.1.1",
