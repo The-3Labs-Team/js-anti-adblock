@@ -51,7 +51,7 @@ export default class AntiAdBlocker {
 
       body.innerHTML +=
             `
-            <div style="${getRandomStyle()}">
+            <div style="${getRandomStyle()};">
                 <div style="width: 100%; max-width: 900px; margin: auto; background-color: white; border-radius: 1rem; padding-top: 50px; overflow: hidden">
                     <!--Header-->
                     <div style="text-align: center">
@@ -63,7 +63,7 @@ export default class AntiAdBlocker {
                     
                     <!--Main-->
                     <div style="text-align: center; margin: 40px 0; padding: 20px 0; background-color: #f6f6f6;">
-                        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px">Disattiva l'Ad Blocker <br> e naviga gratuitamente</h1>
+                        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 15px;">Disattiva l'Ad Blocker <br> e naviga gratuitamente</h1>
                         <button onclick="location.reload()" 
                         style="background-color: ${config.color}; border: none; color: white; padding: 15px 35px; font-size: 1.3rem; border-radius: 5rem; cursor: pointer; font-weight: bold;">
                             Aggiorna pagina
@@ -73,7 +73,7 @@ export default class AntiAdBlocker {
                     
                     <!--Footer-->
                     <div style="padding: 0px 30px 30px 30px;">
-                        <h2 style="font-weight: normal">Come disattivare l'Ad Blocker</h2>
+                        <h2 style="font-weight: normal; font-size: 1.5rem">Come disattivare l'Ad Blocker</h2>
                         <ul style="margin-left: 40px">
                             <li style="margin: 15px 0">
                                 <span style="font-weight: bold">Fai clic sull'icona dell'estensione per il blocco annunci</span> installata sul tuo browser. In genere l'icona si trova nell'angolo in alto a destra dello schermo. Potrebbero essere installati più blocchi annunci. 
@@ -132,7 +132,7 @@ export default class AntiAdBlocker {
         },
         {
           name: 'font-family',
-          value: 'Arial Nova'
+          value: 'Sans-serif'
         },
         {
           name: 'backdrop-filter',
