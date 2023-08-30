@@ -132,7 +132,7 @@ export default class AntiAdBlocker {
         },
         {
           name: 'font-family',
-          value: 'Sans-serif'
+          value: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol'
         },
         {
           name: 'backdrop-filter',
