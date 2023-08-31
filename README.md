@@ -22,4 +22,13 @@ or import this for check if the user have an ad-blocker, **don't show a pop-up, 
 import FindAdBlocker from '/dist/findAdBlocker.min.ob.js';
 
 const adBlocker = new FindAdBlocker();
+
+adBlocker.detectAdBlock().then(() => {
+    if(adBlocker.result) {
+        console.log("AdBlocker Enabled");
+    }
+    else {
+        console.log("AdBlocker Disabled");
+    }
+});
 ```
