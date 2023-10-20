@@ -33,45 +33,56 @@ export default class AntiAdBlocker {
       body.innerHTML +=
             `
             <div style="${getRandomStyle()};">
-                <div style="width: 100%; max-width: 900px; margin: auto; background-color: white; border-radius: 1rem; padding-top: 50px; overflow: hidden">
-                    <!--Header-->
-                    <div style="text-align: center">
-                        <img src="${config.logo.url}" alt="Logo" 
-                            style="width:${config.logo.width}; height: ${config.logo.height}; margin: auto; object-fit: contain;
-                        ">
-                        <p style="font-size: 1.1rem; margin: 10px 0; padding: 0 20px;">Abbiamo notato che stai usando uno strumento che blocca gli annunci pubblicitari</p>
+            <!-- <div class="style"> -->
+                <div style="width: 100%; max-width: 500px; margin: auto; background-color: white; border-radius: 1rem; overflow: hidden">
+    
+    
+                    <!-- Content -->
+                    <section id="content">
+    
+                    ${getContentFirstPage()}
+    
+    
+                    </section>
+    
+                    <p style="text-align: center; margin: 20px 0; font-size: .9rem;">
+                        Adblock Detector è un progetto di <a href="https://www.3labs.it" target="_blank" style="font-weight: bold; text-decoration: none; color: black;">3Labs™ Team</a>
+                    </p>
+    
+                    
+                    <!-- Buttons -->
+    
+                    <div style="display: flex;">
+    
+                        <span onclick="toggleContent()" id="how-to-remove" style="width: 50%; height: 60px; padding: 10px; text-align: center; display: flex; justify-content: center; align-items:center; border-top: 1px solid rgb(121, 121, 121); cursor: pointer; background-color: white; ">Come lo disattivo?</span>
+                        <span onclick="location.reload()" style="width: 50%; height: 60px; padding: 10px; text-align: center; display: flex; justify-content: center; align-items:center; border-top: 1px solid rgb(121, 121, 121); cursor: pointer; background-color: black; color: white; ">Ok, fatto!</span>
+    
                     </div>
-                    
-                    <!--Main-->
-                    <div style="text-align: center; margin: 40px 0; padding: 20px 0; background-color: #f6f6f6;">
-                        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 15px;">Disattiva l'Ad Blocker <br> e naviga gratuitamente</h1>
-                        <button onclick="location.reload()" 
-                        style="background-color: ${config.color}; border: none; color: white; padding: 15px 35px; font-size: 1.3rem; border-radius: 5rem; cursor: pointer; font-weight: bold;">
-                            Aggiorna pagina
-                        </button>
-                        <p style="font-size: .75rem; font-weight: lighter; margin: 5px 0 0;">Dopo aver disattivato l'Ad Block</p>
-                    </div>      
-                    
-                    <!--Footer-->
-                    <div style="padding: 0px 30px 30px 30px;">
-                        <h2 style="font-weight: normal; font-size: 1.5rem">Come disattivare l'Ad Blocker</h2>
-                        <ul style="margin-left: 40px">
-                            <li style="margin: 15px 0">
-                                <span style="font-weight: bold">Fai clic sull'icona dell'estensione per il blocco annunci</span> installata sul tuo browser. In genere l'icona si trova nell'angolo in alto a destra dello schermo. Potrebbero essere installati più blocchi annunci. 
-                            </li>
-                            <li style="margin: 15px 0">
-                                <span style="font-weight: bold">Segui le istruzioni per disattivare il blocco annunci</span> sul sito. Potresti dover selezionare un'opzione del menu o fare clic su un pulsante.
-                            </li>
-                            <li style="margin: 15px 0">
-                                <span style="font-weight: bold">Aggiorna la pagina</span> seguendo le istruzioni o facendo clic sul pulsante "Aggiorna" o "Ricarica" del browser. 
-                            </li>   
-                        </ul>
-                    </div>
-                    
+    
+    
                 </div>  
             </div>
+
+
+            <style>
+            #ad-icon-small{
+                    display: none;
+                }
+
+            @media screen and (max-width: 500px){
+                #ad-icon{
+                    display: none;
+                }
+
+                #ad-icon-small{
+                    display: inline-block;
+                }
+                
+            }
+        </style>
     `
     }
+
 
     function getRandomStyle () {
       const styles = [
@@ -126,5 +137,117 @@ export default class AntiAdBlocker {
 
       return randomStyle.map(index => `${styles[index].name}: ${styles[index].value};`).join(' ')
     }
+
+
+    function getContentFirstPage(){
+      return `
+          <div id="content-1" style="display: flex; padding: 30px 10px 10px; min-height: 305px;">
+              <div style="margin-left: 10px;">
+
+                  <div style="display:flex; justify-content: space-between;">
+                      <p>
+                          <span style="text-transform: uppercase;">Alt!</span> Mi è sembrato di vedere un...aa
+                          <br>
+                          <span style="font-size: 3rem; font-weight: bold; text-transform: uppercase;">Adblock!</span>
+                      </p>
+                      <img src="./assets/adIconSmall.png" id="ad-icon-small">
+                  </div>
+
+                  
+
+                  <p style="font-size: 1.1rem; color: rgb(107, 114, 128); line-height: 28px; margin: 20px 0;">
+                      Ci spiace doverti annoiare ma sembra che tu stia utilizzando un <span style="font-weight: bold;">blocco pubblicitario</span>. Ti chiediamo di disabilitarlo per continuare a navigare, grazie!
+                  </p>
+              </div>
+              
+              <img src="./assets/adIcon.png" id="ad-icon" style="width: 100%; height: 100%;">
+          </div>
+          `;
+  }
+
+  function getContentSecondPage(){
+    return `
+        <div id="content-2" style="padding: 30px 10px 10px; min-height: 305px">
+            <div style="margin-left: 10px;">
+                <p style="font-weight: bold; font-size: 1.5rem; margin-bottom: 20px;">
+                    Come disattivare l'Ad Blocker</span>
+                </p>
+
+                <ol style="font-size: 1.1rem; color: rgb(107, 114, 128);">
+                    <li style="margin: 25px 20px;">
+                        <span style="font-weight: bold;">Clicca sull'icona dell'estensione per il blocco annunci</span>. Di solito si trova nell'angolo in alto a destra dello schermo.
+                    </li>   
+                    <li style="margin: 25px 20px;">
+                        Segui le istruzioni per <span style="font-weight: bold;">disattivare il blocco annunci</span>.
+                    </li>
+                    <li style="margin: 25px 20px;">
+                        Aggiorna la pagina cliccando su <span style="font-weight: bold;">"Ok, fatto!"</span>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+        `;
+        button.innerHTML = 'Indietro';
+  }
+
+  function toggleContent(){
+    const content = document.getElementById('content');
+    const button = document.getElementById('how-to-remove');
+
+
+    if(content.innerHTML.includes('<div id="content-1"')){
+        content.innerHTML = `
+        <div id="content-2" style="padding: 30px 10px 10px; min-height: 305px">
+            <div style="margin-left: 10px;">
+                <p style="font-weight: bold; font-size: 1.5rem; margin-bottom: 20px;">
+                    Come disattivare l'Ad Blocker</span>
+                </p>
+
+                <ol style="font-size: 1.1rem; color: rgb(107, 114, 128);">
+                    <li style="margin: 25px 20px;">
+                        <span style="font-weight: bold;">Clicca sull'icona dell'estensione per il blocco annunci</span>. Di solito si trova nell'angolo in alto a destra dello schermo.
+                    </li>   
+                    <li style="margin: 25px 20px;">
+                        Segui le istruzioni per <span style="font-weight: bold;">disattivare il blocco annunci</span>.
+                    </li>
+                    <li style="margin: 25px 20px;">
+                        Aggiorna la pagina cliccando su <span style="font-weight: bold;">"Ok, fatto!"</span>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+        `;
+        button.innerHTML = 'Indietro';
+    }else{
+        content.innerHTML = `
+        <div id="content-1" style="display: flex; padding: 30px 10px 10px; min-height: 305px;">
+            <div style="margin-left: 10px;">
+
+                <div style="display:flex; justify-content: space-between;">
+                    <p>
+                        <span style="text-transform: uppercase;">Alt!</span> Mi è sembrato di vedere un...
+                        <br>
+                        <span style="font-size: 3rem; font-weight: bold; text-transform: uppercase;">Adblock!</span>
+                    </p>
+                    <img src="./assets/adIconSmall.png" id="ad-icon-small">
+                </div>
+
+                
+
+                <p style="font-size: 1.1rem; color: rgb(107, 114, 128); line-height: 28px; margin: 20px 0;">
+                    Ci spiace doverti annoiare ma sembra che tu stia utilizzando un <span style="font-weight: bold;">blocco pubblicitario</span>. Ti chiediamo di disabilitarlo per continuare a navigare, grazie!
+                </p>
+            </div>
+            
+            <img src="./assets/adIcon.png" id="ad-icon" style="width: 100%; height: 100%;">
+        </div>
+        `;
+        button.innerHTML = 'Come lo disattivo?';
+    }
+}
+
+
   }
 }
