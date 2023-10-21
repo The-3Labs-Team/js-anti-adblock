@@ -1,17 +1,13 @@
 import { detectAdBlock } from '/resources/detectAdBlock.js';
 
 export default class AntiAdBlocker {
-  constructor({color: color, logo:{url: url, width: width, heigth: heigth}, hiddenBody: hiddenBody}) {
+  constructor({hiddenBody: hiddenBody}) {
 
     const config = {
-      color: color,
-      logo: {
-        url: url ?? './assets/logo.svg',
-        width: width ?? '300px',
-        height: heigth ?? '50px'
-      },
       hiddenBody: hiddenBody ?? true
     }
+
+    const isItalianLanguage = navigator.language === 'it-IT' ? true : false;
 
     const body = document.querySelector('body')
 
@@ -33,45 +29,81 @@ export default class AntiAdBlocker {
       body.innerHTML +=
             `
             <div style="${getRandomStyle()};">
-                <div style="width: 100%; max-width: 900px; margin: auto; background-color: white; border-radius: 1rem; padding-top: 50px; overflow: hidden">
-                    <!--Header-->
-                    <div style="text-align: center">
-                        <img src="${config.logo.url}" alt="Logo" 
-                            style="width:${config.logo.width}; height: ${config.logo.height}; margin: auto; object-fit: contain;
-                        ">
-                        <p style="font-size: 1.1rem; margin: 10px 0; padding: 0 20px;">Abbiamo notato che stai usando uno strumento che blocca gli annunci pubblicitari</p>
+            <!-- <div class="style"> -->
+                <div style="width: 100%; max-width: 500px; margin: auto; background-color: white; border-radius: 1rem; overflow: hidden; position: relative;">
+
+                <img src="./assets/logo-small.svg" style="position: absolute; top: 0; right: 0; background-color: #D9D9D9; padding: 10px; border-bottom-left-radius: 1rem;">
+
+    
+    
+                    <!-- Content -->
+                    <section id="content">
+                      ${getContentFirstPage()}
+                    </section>
+    
+                    <p style="text-align: center; margin: 20px 0; font-size: .9rem;">
+                        ${isItalianLanguage ? 'Adblock Detector è un progetto di' : 'Adblock Detector is a  project by' } <a href="https://www.3labs.it" target="_blank" style="font-weight: bold; text-decoration: none; color: black;">3Labs™ Team</a>
+                    </p>
+    
+                    
+                    <!-- Buttons -->
+    
+                    <div style="display: flex; border-top: 1px solid #E5E7EB">
+    
+                    <span onclick="toggleContent()" id="how-to-remove" style="width: 50%; height: 60px; padding: 10px; text-align: center; display: flex; justify-content: center; align-items:center; cursor: pointer; background-color: white; ">
+                      ${getHowDisableButton()}
+                    </span>
+                    <span onclick="location.reload()" style="width: 50%; height: 60px; padding: 10px; text-align: center; display: flex; justify-content: center; align-items:center; cursor: pointer; background-color: black; color: white; font-weight: bold; ">
+                      ${isItalianLanguage ? 'Ok, fatto!' : 'Ok, done!'}
+                    </span>
+    
                     </div>
-                    
-                    <!--Main-->
-                    <div style="text-align: center; margin: 40px 0; padding: 20px 0; background-color: #f6f6f6;">
-                        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 15px;">Disattiva l'Ad Blocker <br> e naviga gratuitamente</h1>
-                        <button onclick="location.reload()" 
-                        style="background-color: ${config.color}; border: none; color: white; padding: 15px 35px; font-size: 1.3rem; border-radius: 5rem; cursor: pointer; font-weight: bold;">
-                            Aggiorna pagina
-                        </button>
-                        <p style="font-size: .75rem; font-weight: lighter; margin: 5px 0 0;">Dopo aver disattivato l'Ad Block</p>
-                    </div>      
-                    
-                    <!--Footer-->
-                    <div style="padding: 0px 30px 30px 30px;">
-                        <h2 style="font-weight: normal; font-size: 1.5rem">Come disattivare l'Ad Blocker</h2>
-                        <ul style="margin-left: 40px">
-                            <li style="margin: 15px 0">
-                                <span style="font-weight: bold">Fai clic sull'icona dell'estensione per il blocco annunci</span> installata sul tuo browser. In genere l'icona si trova nell'angolo in alto a destra dello schermo. Potrebbero essere installati più blocchi annunci. 
-                            </li>
-                            <li style="margin: 15px 0">
-                                <span style="font-weight: bold">Segui le istruzioni per disattivare il blocco annunci</span> sul sito. Potresti dover selezionare un'opzione del menu o fare clic su un pulsante.
-                            </li>
-                            <li style="margin: 15px 0">
-                                <span style="font-weight: bold">Aggiorna la pagina</span> seguendo le istruzioni o facendo clic sul pulsante "Aggiorna" o "Ricarica" del browser. 
-                            </li>   
-                        </ul>
-                    </div>
-                    
+    
+    
                 </div>  
             </div>
+
+            <style>
+            
+            *{
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+      
+            #ad-icon-small{
+                    display: none;
+                }
+
+            @media screen and (max-width: 500px){
+                #ad-icon{
+                    display: none;
+                }
+
+                #ad-icon-small{
+                    display: inline-block;
+                }
+                
+            }
+        </style>
     `
+      const script = document.createElement('script');
+      script.textContent = `
+        function toggleContent() {
+          const content = document.getElementById('content');
+          const button = document.getElementById('how-to-remove');
+          if (content.innerHTML.includes('<div id="content-1"')) {
+            content.innerHTML = \`${getContentSecondPage()}\`;
+            button.innerHTML = \`${getReturnBackButton()}\`;
+          } else {
+            content.innerHTML = \`${getContentFirstPage()}\`;
+            button.innerHTML = \`${getHowDisableButton()}\`;
+          }
+        }
+      `;
+      body.appendChild(script);
     }
+
 
     function getRandomStyle () {
       const styles = [
@@ -126,5 +158,63 @@ export default class AntiAdBlocker {
 
       return randomStyle.map(index => `${styles[index].name}: ${styles[index].value};`).join(' ')
     }
+
+
+    function getContentFirstPage(){
+
+      return `<div id="content-1" style="display: flex; padding: 30px 10px 10px; min-height: 305px;">
+              <div style="margin-left: 10px;">
+
+                  <div style="display:flex; justify-content: space-between;">
+                      <p>
+                      ${isItalianLanguage ? '<span style="text-transform: uppercase;">Alt!</span> Mi è sembrato di vedere un...' : '<span style="text-transform: uppercase;">Alt!</span> I thought I saw an...' }
+                          <br>
+                          <span style="font-size: 3rem; font-weight: bold; text-transform: uppercase;">Adblock!</span>
+                      </p>
+                      <img src="./assets/adIconSmall.png" id="ad-icon-small">
+                  </div>
+
+                  
+
+                  <p style="font-size: 1.1rem; color: rgb(107, 114, 128); line-height: 28px; margin: 20px 0;">
+                      ${isItalianLanguage ? 'Abbiamo limitato la pubblicità sui nostri siti, ti chiediamo la cortesia di disabilitare l\'AdBlock per continuare a navigare. Grazie!' : 'We have limited advertising on our sites, we ask you to disable AdBlock to continue browsing. Thank you!'}
+                  </p>
+              </div>
+              
+              <img src="./assets/adIcon.png" id="ad-icon" style="width: 100%; height: 100%;">
+          </div> `;
+  }
+
+    function getContentSecondPage(){
+      return `<div id="content-2" style="padding: 30px 10px 10px; min-height: 305px">
+            <div style="margin-left: 10px;">
+                <p style="font-weight: bold; font-size: 1.5rem; margin-bottom: 20px;">
+                ${isItalianLanguage ? 'Come disattivare l\'Ad Blocker' : 'How to disable Ad Blocker'}
+                </p>
+
+                <ol style="font-size: 1.1rem; color: rgb(107, 114, 128);">
+                    <li style="margin: 25px 20px;">
+                      ${isItalianLanguage ? '<span style="font-weight: bold;">Clicca sull\'icona dell\'estensione per il blocco annunci</span>. Di solito si trova nell\'angolo in alto a destra dello schermo.' : '<span style="font-weight: bold;">Click on the extension icon for the ad blocker</span>. It is usually located in the top right corner of the screen.'}
+                    </li>   
+                    <li style="margin: 25px 20px;">
+                      ${isItalianLanguage ? 'Segui le istruzioni per <span style="font-weight: bold;">disattivare il blocco annunci</span>.' : 'Follow the instructions to <span style="font-weight: bold;">disable ad blocking</span>.'}
+                    </li>
+                    <li style="margin: 25px 20px;">
+                      ${isItalianLanguage ? 'Aggiorna la pagina cliccando su <span style="font-weight: bold;">"Ok, fatto!"</span>' : 'Refresh the page by clicking on <span style="font-weight: bold;">"Ok, done!"</span>'}
+                    </li>
+                </ol>
+
+            </div>
+        </div>`;
+    }
+
+    function getHowDisableButton(){
+      return `${isItalianLanguage ? 'Come lo disattivo?' : 'How to disable?'}`;
+    }
+
+    function getReturnBackButton(){
+      return `${isItalianLanguage ? 'Indietro' : 'Back'}`;
+    }
+
   }
 }
