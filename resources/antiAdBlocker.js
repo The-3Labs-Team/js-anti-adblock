@@ -167,7 +167,7 @@ export default class AntiAdBlocker {
 
                   <div style="display:flex; justify-content: space-between;">
                       <p>
-                      ${isItalianLanguage ? '<span style="text-transform: uppercase;">Alt!</span> Mi è sembrato di vedere un...' : '<span style="text-transform: uppercase;">Alt!</span> I thought I saw a...' }
+                      ${isItalianLanguage ? '<span style="text-transform: uppercase;">Alt!</span> Mi è sembrato di vedere un...' : '<span style="text-transform: uppercase;">Alt!</span> I thought I saw an...' }
                           <br>
                           <span style="font-size: 3rem; font-weight: bold; text-transform: uppercase;">Adblock!</span>
                       </p>
@@ -177,7 +177,7 @@ export default class AntiAdBlocker {
                   
 
                   <p style="font-size: 1.1rem; color: rgb(107, 114, 128); line-height: 28px; margin: 20px 0;">
-                      ${isItalianLanguage ? 'Ci spiace doverti annoiare ma sembra che tu stia utilizzando un <span style="font-weight: bold;">blocco pubblicitario</span>. Ti chiediamo di disabilitarlo per continuare a navigare, grazie!' : 'Sorry to bother you but it appears you are using an <span style="font-weight: bold;">ad blocker</span>. We ask you to disable it to continue browsing, thank you!'}
+                      ${isItalianLanguage ? 'Abbiamo limitato la pubblicità sui nostri siti, ti chiediamo la cortesia di disabilitare l\'AdBlock per continuare a navigare. Grazie!' : 'We have limited advertising on our sites, we ask you to disable AdBlock to continue browsing. Thank you!'}
                   </p>
               </div>
               
