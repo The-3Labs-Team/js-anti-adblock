@@ -37,7 +37,7 @@
 
     const isItalianLanguage = navigator.language === 'it-IT' ? true : false;
 
-    const imagesCdnUrl = 'https://cdn.jsdelivr.net/gh/The-3Labs-Team/js-anti-adblock@main/demo/assets'  
+    const imagesCdnUrl = 'https://cdn.jsdelivr.net/gh/The-3Labs-Team/js-anti-adblock@main/assets'  
 
     const body = document.querySelector('body')
 

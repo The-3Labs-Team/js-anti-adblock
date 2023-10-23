@@ -1,7 +1,7 @@
 {
   "name": "js-anti-adblock",
   "description": "A simple and lightweight script for detect Adblock",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/The-3Labs-Team/js-anti-adblock#readme",
   "scripts": {
-    "minify": "uglifyjs resources/antiAdBlocker.js -o dist/antiAdBlocker.min.js -c -m && uglifyjs resources/findAdBlocker.js -o dist/findAdBlocker.min.js",
-    "obfuscate": "javascript-obfuscator dist/antiAdBlocker.min.js --output dist/antiAdBlocker.min.ob.js && javascript-obfuscator dist/findAdBlocker.min.js --output dist/findAdBlocker.min.ob.js",
+    "minify": "uglifyjs resources/antiAdBlocker.js -o dist/antiAdBlocker.min.js -c -m",
+    "obfuscate": "javascript-obfuscator dist/antiAdBlocker.min.js --output dist/antiAdBlocker.min.ob.js",
     "build": "npm run minify && npm run obfuscate",
     "start": "http-server -p 8080",
     "lint": "eslint resources/**",
