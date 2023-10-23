@@ -1,13 +1,43 @@
-import { detectAdBlock } from '/resources/detectAdBlock.js';
+// import { detectAdBlock } from 'resources/detectAdBlock.js';
 
-export default class AntiAdBlocker {
-  constructor({hiddenBody: hiddenBody}) {
+// export default class AntiAdBlocker {
+//   constructor({hiddenBody: hiddenBody}) {
 
-    const config = {
-      hiddenBody: hiddenBody ?? true
+//     const config = {
+//       hiddenBody: hiddenBody ?? true
+//     }
+
+  async function detectAdBlock() {
+    let adBlockEnabled = false;
+    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+
+    try {
+        const keywordsToCheck = ['uBlock', 'height:1px!important'];
+
+        const response = await fetch(new Request(googleAdUrl));
+        if (!response.headers.get('content-length')) {
+            adBlockEnabled = true;
+        }
+
+        const responseText = await response.text();
+        const adBlockDetected = keywordsToCheck.some(keyword => responseText.includes(keyword));
+        if (adBlockDetected) {
+            adBlockEnabled = true;
+        }
+    } catch (e) {
+        adBlockEnabled = true;
+    } finally {
+        console.log(`AdBlock Enabled: ${adBlockEnabled}`);
     }
 
+    return adBlockEnabled;
+  }
+
+    const hiddenBody = false
+
     const isItalianLanguage = navigator.language === 'it-IT' ? true : false;
+
+    const imagesCdnUrl = 'https://cdn.jsdelivr.net/gh/The-3Labs-Team/js-anti-adblock@main/assets'  
 
     const body = document.querySelector('body')
 
@@ -16,7 +46,7 @@ export default class AntiAdBlocker {
 
       if (adBlockEnabled) {
         body.setAttribute('aria-hidden', 'true');
-        if (config.hiddenBody) {
+        if (hiddenBody) {
           body.innerHTML = '';
         }
         showBannerAdBlock();
@@ -32,7 +62,7 @@ export default class AntiAdBlocker {
             <!-- <div class="style"> -->
                 <div style="width: 100%; max-width: 500px; margin: auto; background-color: white; border-radius: 1rem; overflow: hidden; position: relative;">
 
-                <img src="./assets/logo-small.svg" style="position: absolute; top: 0; right: 0; background-color: #D9D9D9; padding: 10px; border-bottom-left-radius: 1rem;">
+                <img src="${imagesCdnUrl}/logo-small.svg" style="position: absolute; top: 0; right: 0; background-color: #D9D9D9; padding: 10px; border-bottom-left-radius: 1rem;">
 
     
     
@@ -149,8 +179,9 @@ export default class AntiAdBlocker {
         },
         {
           name: 'backdrop-filter',
-          value: 'blur(5px)'
-        }
+          value: 'blur(5px) grayscale(100%)'
+        },
+        
       ]
 
       const randomStyle = Array.from({ length: styles.length }, (_, index) => index)
@@ -171,7 +202,7 @@ export default class AntiAdBlocker {
                           <br>
                           <span style="font-size: 3rem; font-weight: bold; text-transform: uppercase;">Adblock!</span>
                       </p>
-                      <img src="./assets/adIconSmall.png" id="ad-icon-small">
+                      <img src="${imagesCdnUrl}/adIconSmall.png" id="ad-icon-small">
                   </div>
 
                   
@@ -181,7 +212,7 @@ export default class AntiAdBlocker {
                   </p>
               </div>
               
-              <img src="./assets/adIcon.png" id="ad-icon" style="width: 100%; height: 100%;">
+              <img src="${imagesCdnUrl}/adIcon.png" id="ad-icon" style="width: 100%; height: 100%;">
           </div> `;
   }
 
@@ -215,6 +246,3 @@ export default class AntiAdBlocker {
     function getReturnBackButton(){
       return `${isItalianLanguage ? 'Indietro' : 'Back'}`;
     }
-
-  }
-}
