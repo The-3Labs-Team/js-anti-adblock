@@ -12,9 +12,7 @@ npm i js-anti-adblock
 
 Import this into your app.js, this check if the user have an ad-blocker and will create a pop-up with a message and a logo
 ```js
-import AntiAdBlocker from '/js-anti-adblock/dist/antiAdBlocker.min.ob.js';
-
-const adBlocker = new AntiAdBlocker({hiddenBody: true});
+import 'js-anti-adblock/dist/antiAdBlocker.min.ob.js';
 ```
 
 or use the CDN ```https://cdn.jsdelivr.net/gh/The-3Labs-Team/js-anti-adblock@main/dist/antiAdBlocker.min.ob.js ```
