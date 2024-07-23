@@ -1,6 +1,6 @@
-# 🥔 PotatoShield: Advanced Adblock Detection
+# ⛔ JS Anti Adblock: Advanced Adblock Detection
 
-PotatoShield is a highly customizable software solution designed to detect adblock usage and display notifications to users. Key features include:
+JS Anti Adblock is a highly customizable software solution designed to detect adblock usage and display notifications to users. Key features include:
 
 - Robust adblock detection across major browsers
 - Customizable notification system
@@ -23,12 +23,12 @@ npm i js-anti-adblock
 Import this into your app.js, this check if the user have an ad-blocker and will create a pop-up with a message and a logo
 
 ```js
-import 'potatoshield-js/dist/antiAdBlocker.min.ob.js';
+import 'js-anti-adblock/dist/antiAdBlocker.min.ob.js';
 ```
 
 or use the CDN 
-```https://cdn.jsdelivr.net/gh/The-3Labs-Team/potatoshield-js@main/dist/antiAdBlocker.min.ob.js ```
+```https://cdn.jsdelivr.net/gh/The-3Labs-Team/js-anti-adblock@main/dist/antiAdBlocker.min.ob.js ```
 
 ```js
-<script src="https://cdn.jsdelivr.net/gh/The-3Labs-Team/potatoshield-js@main/dist/antiAdBlocker.min.ob.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/The-3Labs-Team/js-anti-adblock@main/dist/antiAdBlocker.min.ob.js"></script>
 ```
