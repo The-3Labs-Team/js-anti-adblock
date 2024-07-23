@@ -1,4 +1,4 @@
-# PotatoShield: Advanced Adblock Detection
+# 🥔 PotatoShield: Advanced Adblock Detection
 
 PotatoShield is a highly customizable software solution designed to detect adblock usage and display notifications to users. Key features include:
 
