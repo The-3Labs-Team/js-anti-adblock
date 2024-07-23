@@ -9,7 +9,7 @@ JS Anti Adblock is a highly customizable software solution designed to detect ad
 - Performance optimization to minimize impact on page load times
 - Analytics and reporting capabilities
 
-With PotatoShield, website owners can engage with adblock users through tailored messages, encouraging fair usage while respecting user choice. The software's extensive customization options allow for seamless integration with existing design and messaging strategies.
+With JS Anti Adblock, website owners can engage with adblock users through tailored messages, encouraging fair usage while respecting user choice. The software's extensive customization options allow for seamless integration with existing design and messaging strategies.
 
 # Installation
 
